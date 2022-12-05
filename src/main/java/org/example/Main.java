@@ -49,8 +49,13 @@ public class Main {
     }
 
     void printMaxElf() {
-        Long maxWeight = this.elves.stream().max(Comparator.comparingLong(Elf::sum)).get().sum();
-        System.out.println(maxWeight);
+        // Long maxWeight = this.elves.stream().max(Comparator.comparingLong(Elf::sum)).get().sum();
+        // System.out.println(maxWeight);
+
+        // Sum of the 3 max weights
+        List<Elf> sortedElves = this.elves.stream().sorted(Comparator.comparingLong(Elf::sum)).toList();
+        List<Elf> maxElves = sortedElves.subList(sortedElves.size() - 3, sortedElves.size());
+        System.out.println(maxElves.stream().map(Elf::sum).reduce(Long::sum).get());
     }
 
 }
